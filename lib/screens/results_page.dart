@@ -4,7 +4,15 @@ import '../utils/styles.dart';
 import '../widgets/card.dart';
 
 class ResultsPage extends StatelessWidget {
-  const ResultsPage({Key? key}) : super(key: key);
+  final String bmiVal;
+  final String resultText;
+  final String interpretation;
+  const ResultsPage({
+    Key? key,
+    required this.bmiVal,
+    required this.resultText,
+    required this.interpretation,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,30 +31,33 @@ class ResultsPage extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(vertical: 40),
                 child: CardContainer(
                   color: Styles.activeCardColor,
-                  cardChild: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Normal Weight',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.green,
+                  cardChild: Container(
+                    padding: EdgeInsets.all(20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          resultText.toUpperCase(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.greenAccent,
+                          ),
                         ),
-                      ),
-                      Text(
-                        '25.6',
-                        style: Styles.heading6,
-                      ),
-                      Text(
-                        'You have a normal body weight.',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w300,
+                        Text(
+                          bmiVal,
+                          style: Styles.heading6,
                         ),
-                      ),
-                    ],
+                        Text(
+                          interpretation,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

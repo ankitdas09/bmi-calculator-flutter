@@ -1,3 +1,5 @@
+import 'package:bmi_calculator/screens/results_page.dart';
+import 'package:bmi_calculator/utils/calculator_brain.dart';
 import 'package:bmi_calculator/utils/styles.dart';
 import 'package:bmi_calculator/widgets/card.dart';
 import 'package:bmi_calculator/widgets/icon_content.dart';
@@ -234,7 +236,20 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
             GestureDetector(
-              onTap: () => {Navigator.pushNamed(context, '/results')},
+              onTap: () {
+                CalculatorBrain calc =
+                    CalculatorBrain(weight: weight, height: height);
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultsPage(
+                        bmiVal: calc.bmi(),
+                        resultText: calc.getResults(),
+                        interpretation: calc.getInterpretation()),
+                  ),
+                );
+              },
               child: Container(
                 padding: EdgeInsets.only(bottom: 5),
                 height: bottomButtonHeight,
